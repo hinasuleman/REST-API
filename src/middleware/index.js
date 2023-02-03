@@ -1,6 +1,7 @@
 const bcrypt=require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../user/userModels");
+
 //const {SECRET_KEY, SALT} = require("dotenv");
 //const { SECRET_KEY, SALT} = require("dotenv");
 
@@ -8,6 +9,7 @@ exports.hashPass = async (request,response,next) => {
     
 try {
     // take a password out of the body, hash (encrypt) it using bcrypt and then put back the encrypted password to overwrite the unencrypted password and then pass on the updated body to the next function.
+    console.log (request.body);
     const passwordCopy = request.body.password;
      const hashedPass = await bcrypt.hash(passwordCopy,10);
      console.log(hashedPass);
@@ -25,7 +27,10 @@ try {
 
 exports.comparePass = async (request,response,next) => {
     try {
+        
+        console.log("!!!",request.body);
         request.user = await User.findOne({username: request.body.username});
+       
         console.log(request.user);
         //This pulls the user info from the databse including the hashed password
         const passCheck = await bcrypt.compare(request.body.password, request.user.password)

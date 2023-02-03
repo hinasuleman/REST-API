@@ -8,6 +8,8 @@ userRouter.get("/listUser",tokenCheck, listUsers);
 userRouter.post("/addUser", hashPass, createUser);
 userRouter.post("/login",comparePass, login);
 userRouter.put("/updateUser", updateEmail);
-userRouter.delete("/deleteUser", tokenCheck,deleteUser);
+userRouter.delete("/deleteUser",deleteUser);
+userRouter.get("/authCheck",tokenCheck,login);
+
 
 module.exports = userRouter;
