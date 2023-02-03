@@ -14,6 +14,6 @@ app.use(express.json());
 app.use(userRouter);
 
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
+    console.log(`Listening on the port ${port}`)
 
 });
